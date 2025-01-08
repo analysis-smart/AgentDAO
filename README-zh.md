@@ -3,7 +3,7 @@
 # 名称：
 AgentDAO
 
-# 描述
+# 愿景
 让Agent取代草台班子
 # 角色
 CEO Agent、CTO Agent、USER Agent
