@@ -2,7 +2,7 @@
     "id": "unique-identifier",
     "name": "CEOAgent",
     "modelProvider": "openai",
-    "clients": ["discord", "direct"],
+    "clients": ["telegram", "direct"],
     "settings": {
         "secrets": { "API_KEY": "your-api-key" },
         "voice": { "model": "en-US-neural", "url": "voice-service-url" },
