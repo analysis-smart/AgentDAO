@@ -4,8 +4,8 @@
 AgentDAO
 
 # 愿景
-让Agent取代草台班子
-# 角色
+让Agent取代草台班子(work for ai)
+# DAO中有哪些成员
 CEO Agent、CTO Agent、USER Agent
 # 分工
 1. 制定宪章
