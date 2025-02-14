@@ -23,3 +23,27 @@ retriever_tool = create_retriever_tool(
     retriever,'langsmith_search',"搜索与LangSmith相关的信息。有关LangSmith的任何问题，您必须使用此工具！"
 )
 # 使用一个搜索工具
+from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_openai import ChatOpenAI
+from langchain.agents import create_openai_functions_agent,AgentExecutor
+from langchain_core.messages import HumanMessage,AIMessage
+search = TavilySearchResults()
+
+tools = [retriever_tool,search]
+
+from langchain import hub
+
+prompt = hub.pull("hwchase17/openai-functions-agent")
+API_KEY = os.getenv("API_KEY_TYQW")
+base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+model = "qwen-plus"
+llm = ChatOpenAI(api_key=API_KEY, base_url=base_url, model=model)
+agent = create_openai_functions_agent(llm,tools,prompt)
+agent_executor = AgentExecutor(agent,tools,verbose=True)
+agent_executor.invoke({"input": "langsmith如何帮助测试？"})
+agent_executor.invoke({"input": "旧金山的天气如何？"})
+chat_history = [HumanMessage(content="LangSmith可以帮助测试我的LLM应用程序吗？"), AIMessage(content="可以！")]
+agent_executor.invoke({
+    "chat_history": chat_history,
+    "input": "告诉我如何进行"
+})
