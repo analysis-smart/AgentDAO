@@ -1,6 +1,9 @@
 # python3.11
 langchain==0.3.18
+langchain_community==0.3.17
 langchain_openai==0.3.5
 beautifulsoup4==4.13.3
 faiss-cpu==1.10.0
 dashscope==1.22.1
+langserve==0.3.1
+# click-8.1.8 fastapi-0.115.8 langserve-0.3.1 sse-starlette-1.8.2 starlette-0.45.3 uvicorn-0.34.0
