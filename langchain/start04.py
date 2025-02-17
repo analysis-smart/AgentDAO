@@ -27,9 +27,10 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_openai_functions_agent,AgentExecutor
 from langchain_core.messages import HumanMessage,AIMessage
-search = TavilySearchResults()
+# search = TavilySearchResults()
 
-tools = [retriever_tool,search]
+# tools = [retriever_tool,search]
+tools = [retriever_tool]
 
 from langchain import hub
 
@@ -39,7 +40,14 @@ base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 model = "qwen-plus"
 llm = ChatOpenAI(api_key=API_KEY, base_url=base_url, model=model)
 agent = create_openai_functions_agent(llm,tools,prompt)
-agent_executor = AgentExecutor(agent,tools,verbose=True)
+# agent_executor = AgentExecutor(agent,tools,verbose=True)
+# 使用工厂方法创建Executor
+agent_executor = AgentExecutor.from_agent_and_tools(
+    agent=agent,
+    tools=tools,
+    verbose=True,
+    handle_parsing_errors=True  # 添加错误处理
+)
 agent_executor.invoke({"input": "langsmith如何帮助测试？"})
 agent_executor.invoke({"input": "旧金山的天气如何？"})
 chat_history = [HumanMessage(content="LangSmith可以帮助测试我的LLM应用程序吗？"), AIMessage(content="可以！")]
