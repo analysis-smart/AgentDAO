@@ -67,6 +67,7 @@ app = FastAPI(
 # 6. 手动定义路由
 @app.post("/agent", response_model=Output)
 async def run_agent(input_data: Input):
+    print(input_data)
     try:
         # 将 chat_history 转换为 LangChain 的 BaseMessage 格式
         chat_history = [
